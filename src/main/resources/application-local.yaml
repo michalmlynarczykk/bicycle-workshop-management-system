@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      database: bike-service-management
+      host: localhost
+      port: 27017
+      username: admin
+      password: password
