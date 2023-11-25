@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  application:
+    container_name: bike-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    networks:
+      - bike-service-network
+    ports:
+      - '8080:8080'
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    container_name: mongo-db
+    image: mongo:7.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=bike-service
+    networks:
+      - bike-service-network
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+
+networks:
+  bike-service-network:
+    driver: bridge
