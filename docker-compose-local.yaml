@@ -1,0 +1,36 @@
+version: "3.8"
+
+name: bike-service-management
+services:
+  db:
+    container_name: postgres
+    image: postgres:16.1
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    networks:
+      - bike-service-network
+    ports:
+      - '5432:5432'
+    volumes:
+      - data:/data/db
+
+  adminer:
+    container_name: adminer-bike-service
+    image: adminer
+    restart: always
+    environment:
+        - ADMINER_DEFAULT_SERVER=db
+    networks:
+      - bike-service-network
+    ports:
+      - '8080:8080'
+
+networks:
+  bike-service-network:
+    driver: bridge
+
+volumes:
+    data:
+      driver: local
