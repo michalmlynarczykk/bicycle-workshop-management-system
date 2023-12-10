@@ -14,10 +14,13 @@
     <name>authentication-service</name>
     <description>Authentication related microservice</description>
     <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <org.springframework.boot.version>3.2.0</org.springframework.boot.version>
         <common.version>1.0.0</common.version>
         <postgresql.version>42.7.0</postgresql.version>
         <springboot.starter.test.version>6.2.0</springboot.starter.test.version>
+        <postgresql.version>42.7.1</postgresql.version>
     </properties>
     <dependencies>
         <dependency>
@@ -66,7 +69,6 @@
             <version>${springboot.starter.test.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.michalmlynarczyk</groupId>
             <artifactId>common</artifactId>
