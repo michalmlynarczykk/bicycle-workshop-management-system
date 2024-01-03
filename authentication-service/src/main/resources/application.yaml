@@ -9,3 +9,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+token:
+  expiration: 1_200_000
+  signing:
+    key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=

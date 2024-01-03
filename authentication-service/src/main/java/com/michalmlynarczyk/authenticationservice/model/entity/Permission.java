@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
-@Table(name = "roles")
+@Table(name = "permissions")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Permission {
