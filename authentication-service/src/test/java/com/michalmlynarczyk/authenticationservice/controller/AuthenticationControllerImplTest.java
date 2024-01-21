@@ -100,12 +100,11 @@ class AuthenticationControllerImplTest {
 
 
     private static UserRegistrationRequest getUserRegistrationRequest(final String email) {
-        final UserRegistrationRequest userRegistrationRequest = new UserRegistrationRequest(
+        return new UserRegistrationRequest(
                 email,
                 "password",
                 "John",
                 "Doe",
                 WorkshopPosition.OWNER);
-        return userRegistrationRequest;
     }
 }
