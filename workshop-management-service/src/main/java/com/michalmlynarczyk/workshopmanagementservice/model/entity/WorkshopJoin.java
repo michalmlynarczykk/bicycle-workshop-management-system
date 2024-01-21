@@ -9,24 +9,36 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.OffsetDateTime;
+import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "workshop_join_requests")
-public class WorkshopJoinRequest {
+public class WorkshopJoin {
 
     @Id
     private String id;
 
-    private OffsetDateTime createdAt;
+    private Date createdAt;
 
-    private OffsetDateTime decidedAt;
+    private Date decidedAt;
 
-    private String workshopId;
+    private UUID workshopId;
 
-    private String userId;
+    private UUID userId;
 
     private JoinRequestStatus status;
+
+
+    public static WorkshopJoin of(final UUID workshopId, final UUID userId) {
+        return WorkshopJoin
+                .builder()
+                .createdAt(Date.from(OffsetDateTime.now().toInstant()))
+                .workshopId(workshopId)
+                .status(JoinRequestStatus.PENDING)
+                .build();
+    }
 }
