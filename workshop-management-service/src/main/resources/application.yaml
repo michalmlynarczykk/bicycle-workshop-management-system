@@ -1,22 +1,23 @@
 server:
   port: 8082
+logging:
+  level:
+    com.michalmlynarczyk: DEBUG
 
 spring:
   data:
     mongodb:
       database: workshop
-      uri: mongodb://localhost:27017/workshop
       username: root
       password: password
-openapi:
-  devUrl: http://localhost:8080
-#
-#springdoc:
-#  swagger-ui:
-#    path: /workshop-documentation
-#  api-docs:
-#    path: /workshop-api-docs
-#  packages-to-scan: com.michalmlynarczyk.*
+      port: 27017
+      host: localhost
+      authentication-database: admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: password
 
 token:
   signing:

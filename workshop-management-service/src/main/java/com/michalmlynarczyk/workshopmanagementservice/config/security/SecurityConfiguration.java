@@ -1,6 +1,6 @@
 package com.michalmlynarczyk.workshopmanagementservice.config.security;
 
-import com.michalmlynarczyk.common.config.jwt.JwtFilter;
+import com.michalmlynarczyk.common.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

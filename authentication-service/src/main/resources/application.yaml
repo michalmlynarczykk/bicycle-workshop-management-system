@@ -1,5 +1,8 @@
 server:
   port: 8081
+logging:
+  level:
+    com.michalmlynarczyk: DEBUG
 
 spring:
   datasource:
