@@ -8,4 +8,18 @@ spring:
     password: password
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+openapi:
+  devUrl: http://localhost:8081
+#
+#springdoc:
+#  swagger-ui:
+#    path: /workshop-documentation
+#  api-docs:
+#    path: /workshop-api-docs
+#  packages-to-scan: com.michalmlynarczyk.*
+
+token:
+  expiration: 1_200_000
+  signing:
+    key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
