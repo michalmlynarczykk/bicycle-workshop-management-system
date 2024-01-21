@@ -1,4 +1,4 @@
-package com.michalmlynarczyk.authenticationservice.config;
+package com.michalmlynarczyk.authenticationservice.config.security;
 
 import com.michalmlynarczyk.common.config.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
