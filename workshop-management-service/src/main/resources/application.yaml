@@ -1,13 +1,18 @@
 server:
   port: 8082
+logging:
+  level:
+    com.michalmlynarczyk: DEBUG
 
 spring:
   data:
     mongodb:
       database: workshop
-      uri: mongodb://localhost:27017/workshop
       username: root
       password: password
+      port: 27017
+      host: localhost
+      authentication-database: admin
 openapi:
   devUrl: http://localhost:8080
 #
