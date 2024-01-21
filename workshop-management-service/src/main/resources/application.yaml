@@ -13,15 +13,11 @@ spring:
       port: 27017
       host: localhost
       authentication-database: admin
-openapi:
-  devUrl: http://localhost:8080
-#
-#springdoc:
-#  swagger-ui:
-#    path: /workshop-documentation
-#  api-docs:
-#    path: /workshop-api-docs
-#  packages-to-scan: com.michalmlynarczyk.*
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: password
 
 token:
   signing:

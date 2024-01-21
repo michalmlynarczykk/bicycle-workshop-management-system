@@ -56,6 +56,21 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_SERVER: mongodb
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: "root"
+      RABBITMQ_DEFAULT_PASS: "password"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - data:/var/lib/rabbitmq/
+      - data:/var/log/rabbitmq
+    networks:
+      - bike-service-network
+
 networks:
   bike-service-network:
     driver: bridge
