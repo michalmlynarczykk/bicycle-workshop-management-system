@@ -1,4 +1,4 @@
-package com.michalmlynarczyk.common.model.dto.auth;
+package com.michalmlynarczyk.common.model.dto.authentication;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.michalmlynarczyk.common.jwt;
 
-import com.michalmlynarczyk.common.model.dto.auth.CustomAuthenticationPrincipal;
+import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthenticationPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

@@ -34,6 +34,7 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
                 .collect(Collectors.toSet());
         final Map<String, Object> claims = new HashMap<>();
         claims.put("userId", userDetails.getId());
+        claims.put("workshopId", userDetails.getWorkshopId());
         claims.put("permissions", permissions);
         claims.put("roles", userDetails.getRoleNames());
 
