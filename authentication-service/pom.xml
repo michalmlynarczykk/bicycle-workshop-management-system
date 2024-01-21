@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.michalmlynarczyk</groupId>
-        <artifactId>bike-service-management</artifactId>
+        <artifactId>bicycle-workshop-management-system</artifactId>
         <version>1.0.0</version>
     </parent>
     <artifactId>authentication-service</artifactId>
@@ -15,12 +15,20 @@
     <properties>
         <common.version>1.0.0</common.version>
         <postgresql.version>42.7.1</postgresql.version>
+        <flyway-database-postgresql.version>10.6.0</flyway-database-postgresql.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>${flyway-database-postgresql.version}</version>
             <scope>runtime</scope>
         </dependency>
 

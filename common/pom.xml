@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.michalmlynarczyk</groupId>
-        <artifactId>bike-service-management</artifactId>
+        <artifactId>bicycle-workshop-management-system</artifactId>
         <version>1.0.0</version>
     </parent>
     <artifactId>common</artifactId>
