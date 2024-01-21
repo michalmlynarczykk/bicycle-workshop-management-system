@@ -22,6 +22,10 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtilImpl implements JwtTokenUtil {
 
+    private static final String USER_ID_FIELD = "userId";
+
+    private static final String WORKSHOP_ID_FIELD = "workshopId";
+
     @Value("${token.signing.key}")
     private String jwtSigningKey;
 
@@ -64,8 +68,19 @@ public class JwtTokenUtilImpl implements JwtTokenUtil {
                 .stream()
                 .map(SimpleGrantedAuthority::new)
                 .toList();
+
+        final UUID userId = UUID.fromString(claims.get(USER_ID_FIELD, String.class));
+        final String workshopIdClaim = claims.get(WORKSHOP_ID_FIELD, String.class);
+        UUID workshopId = null;
+        if (workshopIdClaim != null) {
+            workshopId = UUID.fromString(workshopIdClaim);
+        }
+
         return new UsernamePasswordAuthenticationToken(
-                new CustomAuthenticationPrincipal(UUID.fromString(claims.get("userId", String.class)), claims.getSubject()),
+                new CustomAuthenticationPrincipal(
+                        userId,
+                        claims.getSubject(),
+                        workshopId),
                 "N/A",
                 authorities
         );
