@@ -1,15 +1,15 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/authentication
-    username: root
-    password: password
-  jpa:
-    hibernate:
-      ddl-auto: validate
-
+  data:
+    mongodb:
+      database: workshop
+      uri: mongodb://localhost:27017/workshop
+      username: root
+      password: password
+openapi:
+  devUrl: http://localhost:8080
 #
 #springdoc:
 #  swagger-ui:
@@ -19,6 +19,5 @@ spring:
 #  packages-to-scan: com.michalmlynarczyk.*
 
 token:
-  expiration: 1_200_000
   signing:
     key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
