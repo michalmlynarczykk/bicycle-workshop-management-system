@@ -1,20 +1,20 @@
-package com.michalmlynarczyk.authenticationservice;
+package com.michalmlynarczyk.workshopmanagementservice;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.TimeZone;
 
 @SpringBootApplication
-@EnableJpaRepositories
+@EnableMongoRepositories
 @ComponentScan(basePackages = "com.michalmlynarczyk.*")
-public class AuthenticationServiceApplication {
+public class WorkshopManagementServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthenticationServiceApplication.class, args);
+        SpringApplication.run(WorkshopManagementServiceApplication.class, args);
     }
 
 

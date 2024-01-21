@@ -10,6 +10,7 @@
 	<description>bicycle-workshop-management-system</description>
 	<modules>
 		<module>authentication-service</module>
+		<module>workshop-management-service</module>
 		<module>common</module>
 	</modules>
 	<properties>
@@ -39,11 +40,6 @@
 			<artifactId>spring-boot-dependencies</artifactId>
 			<version>${org.springframework.boot.version}</version>
 			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>${org.springframework.boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,5 +1,6 @@
 package com.michalmlynarczyk.authenticationservice.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
@@ -9,24 +10,15 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-@Configuration
+@OpenAPIDefinition(
+        info = @io.swagger.v3.oas.annotations.info.Info(
+                title = "Bicycle workshop management system API",
+                version = "1.0",
+                description = "API for bicycle workshop management system - authentication service"
+        ),
+        servers = {
+                @io.swagger.v3.oas.annotations.servers.Server(url = "http://localhost:8081", description = "Local development server"),
+        }
+)
 public class OpenAPIConfig {
-
-    @Value("${openapi.devUrl}")
-    private String localDevUrl;
-
-
-    @Bean
-    public OpenAPI myOpenAPI() {
-        Server localDev = new Server();
-        localDev.setUrl(localDevUrl);
-        localDev.setDescription("Server URL in Development environment");
-
-
-        Info info = new Info()
-                .title("Bicycle workshop management system API")
-                .version("1.0");
-
-        return new OpenAPI().info(info).servers(List.of(localDev));
-    }
 }
