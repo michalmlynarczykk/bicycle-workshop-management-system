@@ -34,12 +34,12 @@ ALTER TABLE roles_permissions
 
 CREATE TABLE users
 (
-    id                      UUID NOT NULL,
+    id                      UUID         NOT NULL,
     workshop_id             UUID,
-    first_name              VARCHAR(50),
-    last_name               VARCHAR(70),
-    email                   VARCHAR(255),
-    password                VARCHAR(255),
+    first_name              VARCHAR(50)  NOT NULL,
+    last_name               VARCHAR(70)  NOT NULL,
+    email                   VARCHAR(255) NOT NULL,
+    password                VARCHAR(255) NOT NULL,
     account_non_expired     BOOLEAN,
     account_non_locked      BOOLEAN,
     credentials_non_expired BOOLEAN,

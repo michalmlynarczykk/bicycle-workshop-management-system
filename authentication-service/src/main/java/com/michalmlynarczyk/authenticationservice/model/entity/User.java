@@ -37,16 +37,17 @@ public class User implements UserDetails {
 
     private UUID workshopId;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String firstName;
 
-    @Column(length = 70)
+    @Column(length = 70, nullable = false)
     private String lastName;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @ToString.Exclude
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
