@@ -1,5 +1,6 @@
 package com.michalmlynarczyk.authenticationservice.config;
 
+import com.michalmlynarczyk.common.config.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,17 +24,26 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 public class SecurityConfiguration {
 
-    private final JwtFilter jwtFilter;
 
+    private final JwtFilter jwtFilter;
     private final UserDetailsService userService;
+
+    private static final String[] AUTH_WHITELIST = {
+            "/external/v1/auth/register",
+            "/external/v1/auth/login",
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        request -> request.requestMatchers("/external/v1/register", "/external/v1/login")
-                        .permitAll().anyRequest().authenticated()
+                        request -> request.requestMatchers(AUTH_WHITELIST)
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())
