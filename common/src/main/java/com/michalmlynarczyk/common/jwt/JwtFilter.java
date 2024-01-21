@@ -1,6 +1,5 @@
-package com.michalmlynarczyk.common.config.jwt;
+package com.michalmlynarczyk.common.jwt;
 
-import com.michalmlynarczyk.common.jwt.JwtTokenUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
