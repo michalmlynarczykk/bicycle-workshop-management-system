@@ -6,6 +6,7 @@ import com.michalmlynarczyk.authenticationservice.model.dto.response.JwtTokenRes
 import com.michalmlynarczyk.authenticationservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,6 @@ public class AuthenticationControllerImpl implements AuthenticationController {
     public ResponseEntity<JwtTokenResponse> register(final UserRegistrationRequest request) {
         log.debug("register() - enter - request = {}", request);
         final JwtTokenResponse response = userService.register(request);
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
