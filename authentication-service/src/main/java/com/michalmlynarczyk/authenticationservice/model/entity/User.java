@@ -2,6 +2,7 @@ package com.michalmlynarczyk.authenticationservice.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -11,11 +12,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -29,19 +32,27 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
     @Id
-    private UUID id;
+    @Builder.Default
+    private UUID id = UUID.randomUUID();
+
+    private UUID workshopId;
+
     @Column(length = 50)
     private String firstName;
+
     @Column(length = 70)
     private String lastName;
+
     @Column(unique = true)
     private String email;
+
+    @ToString.Exclude
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "role_id") })
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
     private Boolean accountNonExpired;
@@ -59,6 +70,30 @@ public class User implements UserDetails {
                 .map(Role::getPermissions)
                 .flatMap(Set::stream)
                 .map(permission -> new SimpleGrantedAuthority(permission.getName()))
+                .collect(Collectors.toSet());
+    }
+
+
+    public static User of(final String email, final String password, final Set<Role> roles, final String firstName,
+                          final String lastName) {
+        return User
+                .builder()
+                .accountNonExpired(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
+                .enabled(true)
+                .email(email)
+                .password(password)
+                .roles(roles)
+                .firstName(firstName)
+                .lastName(lastName)
+                .build();
+    }
+
+
+    public Set<String> getRoleNames() {
+        return roles.stream()
+                .map(Role::getName)
                 .collect(Collectors.toSet());
     }
 
@@ -90,5 +125,22 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final User that = (User) o;
+
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 }

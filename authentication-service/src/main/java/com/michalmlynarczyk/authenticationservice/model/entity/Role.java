@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Builder
@@ -32,7 +33,24 @@ public class Role {
 
     @ManyToMany
     @JoinTable(name = "roles_permissions",
-            joinColumns = { @JoinColumn(name = "role_id") },
-            inverseJoinColumns = { @JoinColumn(name = "permission_id") })
+            joinColumns = {@JoinColumn(name = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "permission_id")})
     private Set<Permission> permissions;
+
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final Role that = (Role) o;
+
+        return getName() != null && Objects.equals(getName(), that.getName());
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getName());
+    }
 }
