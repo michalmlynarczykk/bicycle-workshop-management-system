@@ -1,6 +1,6 @@
 package com.michalmlynarczyk.workshopmanagementservice.model.entity;
 
-import com.michalmlynarczyk.workshopmanagementservice.model.dto.JoinRequestStatus;
+import com.michalmlynarczyk.workshopmanagementservice.model.dto.ApplicationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +16,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "workshop_join_requests")
-public class WorkshopJoin {
+@Document(collection = "workshop_join_applications")
+public class WorkshopJoinApplication {
 
     @Id
     private String id;
@@ -30,15 +30,28 @@ public class WorkshopJoin {
 
     private UUID userId;
 
-    private JoinRequestStatus status;
+    private ApplicationStatus status;
 
 
-    public static WorkshopJoin of(final UUID workshopId, final UUID userId) {
-        return WorkshopJoin
+    public static WorkshopJoinApplication of(final UUID workshopId, final UUID userId) {
+        return WorkshopJoinApplication
                 .builder()
                 .createdAt(Date.from(OffsetDateTime.now().toInstant()))
+                .userId(userId)
                 .workshopId(workshopId)
-                .status(JoinRequestStatus.PENDING)
+                .status(ApplicationStatus.PENDING)
                 .build();
+    }
+
+
+    public void approve() {
+        this.status = ApplicationStatus.APPROVED;
+        this.decidedAt = Date.from(OffsetDateTime.now().toInstant());
+    }
+
+
+    public void reject() {
+        this.status = ApplicationStatus.REJECTED;
+        this.decidedAt = Date.from(OffsetDateTime.now().toInstant());
     }
 }

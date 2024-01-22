@@ -1,7 +1,7 @@
 package com.michalmlynarczyk.workshopmanagementservice.model.dto;
 
-public enum JoinRequestStatus {
+public enum ApplicationStatus {
     PENDING,
-    ACCEPTED,
+    APPROVED,
     REJECTED
 }

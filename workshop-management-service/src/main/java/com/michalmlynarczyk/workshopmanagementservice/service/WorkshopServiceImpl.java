@@ -33,7 +33,7 @@ public class WorkshopServiceImpl implements WorkshopService {
     public WorkshopResponse createWorkshop(final CreateWorkshopRequest createWorkshopRequest,
                                            final CustomAuthenticationPrincipal principal) {
         log.debug("createWorkshop() - enter - createWorkshopRequest = {}", createWorkshopRequest);
-        checkIfUserAlreadyHasWorkshop(principal);
+        checkIfUserIsAlreadyWorkshopOwner(principal);
 
         final Workshop workshop = WorkshopMapper.toEntity(createWorkshopRequest, principal.userId());
 
@@ -46,8 +46,8 @@ public class WorkshopServiceImpl implements WorkshopService {
     }
 
 
-    private void checkIfUserAlreadyHasWorkshop(final CustomAuthenticationPrincipal principal) {
-        log.debug("checkIfUserAlreadyHasWorkshop() - enter - principal = {}", principal);
+    private void checkIfUserIsAlreadyWorkshopOwner(final CustomAuthenticationPrincipal principal) {
+        log.debug("checkIfUserIsAlreadyWorkshopOwner() - enter - principal = {}", principal);
 
         if (principal.workshopId() != null || workshopRepository.findByOwnerId(principal.userId()).isPresent()) {
             throw new WorkshopAlreadyExistsException("Workshop for owner with userId = {0} already exists", principal.userId());

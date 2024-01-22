@@ -1,7 +1,7 @@
 package com.michalmlynarczyk.workshopmanagementservice.exception.handler;
 
 import com.michalmlynarczyk.workshopmanagementservice.controller.WorkshopJoinControllerImpl;
-import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopJoinRequestAlreadyExistsException;
+import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopJoinApplicationAlreadyExistsException;
 import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -23,8 +23,8 @@ public class WorkshopJoinControllerHandler {
 
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(WorkshopJoinRequestAlreadyExistsException.class)
-    void handleWorkshopJoinRequestAlreadyExistsException(final WorkshopJoinRequestAlreadyExistsException exception) {
+    @ExceptionHandler(WorkshopJoinApplicationAlreadyExistsException.class)
+    void handleWorkshopJoinRequestAlreadyExistsException(final WorkshopJoinApplicationAlreadyExistsException exception) {
         log.debug("handleWorkshopJoinRequestAlreadyExistsException() - exception", exception);
     }
 }

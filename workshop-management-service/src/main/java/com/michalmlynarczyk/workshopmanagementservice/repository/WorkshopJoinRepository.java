@@ -1,6 +1,6 @@
 package com.michalmlynarczyk.workshopmanagementservice.repository;
 
-import com.michalmlynarczyk.workshopmanagementservice.model.entity.WorkshopJoin;
+import com.michalmlynarczyk.workshopmanagementservice.model.entity.WorkshopJoinApplication;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,11 +9,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface WorkshopJoinRepository extends MongoRepository<WorkshopJoin, String> {
+public interface WorkshopJoinRepository extends MongoRepository<WorkshopJoinApplication, String> {
 
-    Optional<WorkshopJoin> findByWorkshopId(final UUID workshopId);
+    Optional<WorkshopJoinApplication> findByIdAndWorkshopId(final String id, final UUID workshopId);
 
-    Optional<WorkshopJoin> findByWorkshopIdAndUserId(final UUID workshopId, final UUID userId);
+    Optional<WorkshopJoinApplication> findByWorkshopIdAndUserId(final UUID workshopId, final UUID userId);
 
-    List<WorkshopJoin> findAllByWorkshopId(final UUID workshopId);
+    List<WorkshopJoinApplication> findAllByWorkshopId(final UUID workshopId);
 }

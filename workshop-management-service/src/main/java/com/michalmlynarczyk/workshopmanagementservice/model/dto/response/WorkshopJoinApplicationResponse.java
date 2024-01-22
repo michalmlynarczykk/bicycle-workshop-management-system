@@ -1,11 +1,11 @@
 package com.michalmlynarczyk.workshopmanagementservice.model.dto.response;
 
-import com.michalmlynarczyk.workshopmanagementservice.model.dto.JoinRequestStatus;
+import com.michalmlynarczyk.workshopmanagementservice.model.dto.ApplicationStatus;
 
 import java.util.Date;
 import java.util.UUID;
 
-public record WorkshopJoinResponse(
+public record WorkshopJoinApplicationResponse(
 
         String id,
 
@@ -17,5 +17,5 @@ public record WorkshopJoinResponse(
 
         UUID userId,
 
-        JoinRequestStatus status) {
+        ApplicationStatus status) {
 }

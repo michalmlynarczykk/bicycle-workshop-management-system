@@ -1,15 +1,17 @@
 package com.michalmlynarczyk.workshopmanagementservice.service;
 
-import com.michalmlynarczyk.workshopmanagementservice.model.dto.request.WorkshopJoinRequest;
-import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopJoinResponse;
-import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopJoinResponseWrapper;
+import com.michalmlynarczyk.workshopmanagementservice.model.dto.request.WorkshopJoinApplicationRequest;
+import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopJoinApplicationResponse;
+import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopJoinApplicationResponseWrapper;
 
 import java.util.UUID;
 
 public interface WorkshopJoinService {
 
-    WorkshopJoinResponse joinWorkshop(final WorkshopJoinRequest workshopJoinRequest, final UUID userId);
+    WorkshopJoinApplicationResponse joinWorkshop(final WorkshopJoinApplicationRequest workshopJoinApplicationRequest, final UUID userId);
 
-    WorkshopJoinResponseWrapper getAllWorkshopJoinRequests(final UUID workshopId);
+    WorkshopJoinApplicationResponseWrapper getAllWorkshopJoinApplications(final UUID workshopId);
+
+    void approveOrRejectWorkshopJoinApplication(final String joinRequestId, final boolean approved, final UUID workshopId);
 
 }
