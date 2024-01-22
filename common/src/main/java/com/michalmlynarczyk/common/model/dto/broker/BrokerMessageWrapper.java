@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public record BrokerMessageWrapper<T>(
         UUID messageId,
-        T message) {
+        T payload) {
 
     public static <T> BrokerMessageWrapper of(T payload) {
         return new BrokerMessageWrapper<>(UUID.randomUUID(), payload);
