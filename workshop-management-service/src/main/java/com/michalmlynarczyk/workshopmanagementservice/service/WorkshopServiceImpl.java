@@ -5,6 +5,7 @@ import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthentication
 import com.michalmlynarczyk.common.model.dto.broker.workshop.WorkshopCreatedEvent;
 import com.michalmlynarczyk.workshopmanagementservice.client.broker.BrokerClient;
 import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopAlreadyExistsException;
+import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopNotFoundException;
 import com.michalmlynarczyk.workshopmanagementservice.mapper.WorkshopMapper;
 import com.michalmlynarczyk.workshopmanagementservice.model.dto.request.CreateWorkshopRequest;
 import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopResponse;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -30,7 +33,7 @@ public class WorkshopServiceImpl implements WorkshopService {
     public WorkshopResponse createWorkshop(final CreateWorkshopRequest createWorkshopRequest,
                                            final CustomAuthenticationPrincipal principal) {
         log.debug("createWorkshop() - enter - createWorkshopRequest = {}", createWorkshopRequest);
-        checkIfUserAlreadyHasWorkshop(principal);
+        checkIfUserIsAlreadyWorkshopOwner(principal);
 
         final Workshop workshop = WorkshopMapper.toEntity(createWorkshopRequest, principal.userId());
 
@@ -43,12 +46,24 @@ public class WorkshopServiceImpl implements WorkshopService {
     }
 
 
-    private void checkIfUserAlreadyHasWorkshop(final CustomAuthenticationPrincipal principal) {
-        log.debug("checkIfUserAlreadyHasWorkshop() - enter - principal = {}", principal);
+    private void checkIfUserIsAlreadyWorkshopOwner(final CustomAuthenticationPrincipal principal) {
+        log.debug("checkIfUserIsAlreadyWorkshopOwner() - enter - principal = {}", principal);
 
         if (principal.workshopId() != null || workshopRepository.findByOwnerId(principal.userId()).isPresent()) {
             throw new WorkshopAlreadyExistsException("Workshop for owner with userId = {0} already exists", principal.userId());
         }
 
     }
+
+
+    @Override
+    public Workshop getWorkshopOrThrowException(final UUID workshopId) {
+        log.trace("getWorkshopOrThrowException() - enter - workshopId = {}", workshopId);
+        final Workshop workshop = workshopRepository.findById(workshopId)
+                .orElseThrow(() -> new WorkshopNotFoundException("Workshop with id = {0} not found", workshopId));
+        log.debug("getWorkshopOrThrowException() - exit - workshop = {}", workshop);
+        return workshop;
+    }
+
+
 }

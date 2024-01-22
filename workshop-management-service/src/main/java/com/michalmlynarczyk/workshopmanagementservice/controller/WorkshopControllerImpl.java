@@ -20,7 +20,7 @@ public class WorkshopControllerImpl implements WorkshopController {
     @Override
     public ResponseEntity<WorkshopResponse> createWorkshop(final CreateWorkshopRequest request,
                                                            final CustomAuthenticationPrincipal principal) {
-        log.debug("createWorkshop() - enter - request = {}", request);
+        log.debug("createWorkshop() - enter - request = {} - principal = {}", request, principal);
         final WorkshopResponse response = workshopService.createWorkshop(request, principal);
         log.debug("createWorkshop() - exit - response = {}", response);
         return ResponseEntity.ok(response);

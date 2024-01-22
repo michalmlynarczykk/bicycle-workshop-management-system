@@ -1,13 +1,14 @@
 package com.michalmlynarczyk.workshopmanagementservice.model.dto.response;
 
 import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 public record WorkshopResponse(
 
         UUID id,
 
-        OffsetDateTime createdAt,
+        Date createdAt,
 
         UUID ownerId,
 

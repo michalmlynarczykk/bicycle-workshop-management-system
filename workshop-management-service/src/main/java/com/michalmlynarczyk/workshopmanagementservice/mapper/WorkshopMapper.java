@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 
 import java.sql.Date;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -35,7 +34,7 @@ public class WorkshopMapper {
     public static WorkshopResponse toDto(final Workshop workshop) {
         return new WorkshopResponse(
                 workshop.getId(),
-                OffsetDateTime.ofInstant(workshop.getCreatedAt().toInstant(), ZoneOffset.UTC),
+                workshop.getCreatedAt(),
                 workshop.getOwnerId(),
                 workshop.getName(),
                 workshop.getAddress().getStreet(),
