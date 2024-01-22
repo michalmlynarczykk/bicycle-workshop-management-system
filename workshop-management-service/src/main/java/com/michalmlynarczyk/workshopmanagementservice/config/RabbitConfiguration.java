@@ -35,7 +35,7 @@ public class RabbitConfiguration {
 
 
     @Bean
-    public TopicExchange techServiceExchange() {
+    public TopicExchange workshopServiceExchange() {
         return ExchangeBuilder.topicExchange(Constant.WORKSHOP_SERVICE_BROKER_EXCHANGE).build();
     }
 

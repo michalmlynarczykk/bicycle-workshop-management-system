@@ -2,6 +2,7 @@ package com.michalmlynarczyk.workshopmanagementservice.exception.handler;
 
 import com.michalmlynarczyk.workshopmanagementservice.controller.WorkshopJoinControllerImpl;
 import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopJoinApplicationAlreadyExistsException;
+import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopJoinApplicationNotFoundException;
 import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -16,15 +17,21 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class WorkshopJoinControllerHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(WorkshopNotFoundException.class)
-    void handleWorkshopNotFoundException(final WorkshopNotFoundException exception) {
-        log.debug("handleWorkshopNotFoundException() - exception", exception);
+    @ExceptionHandler(value = {
+            WorkshopNotFoundException.class,
+            WorkshopJoinApplicationNotFoundException.class
+    })
+    void handleNotFoundException(final Exception exception) {
+        log.debug("handleNotFoundException() - exception", exception);
     }
 
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(WorkshopJoinApplicationAlreadyExistsException.class)
-    void handleWorkshopJoinRequestAlreadyExistsException(final WorkshopJoinApplicationAlreadyExistsException exception) {
-        log.debug("handleWorkshopJoinRequestAlreadyExistsException() - exception", exception);
+    @ExceptionHandler(value = {
+            WorkshopJoinApplicationAlreadyExistsException.class,
+            IllegalStateException.class
+    })
+    void handleConflict(final Exception exception) {
+        log.debug("handleConflict() - exception", exception);
     }
 }
