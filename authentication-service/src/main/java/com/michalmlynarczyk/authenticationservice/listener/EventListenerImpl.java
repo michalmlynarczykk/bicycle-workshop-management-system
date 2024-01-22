@@ -1,5 +1,6 @@
 package com.michalmlynarczyk.authenticationservice.listener;
 
+import com.michalmlynarczyk.authenticationservice.service.UserService;
 import com.michalmlynarczyk.common.model.dto.broker.BrokerMessageWrapper;
 import com.michalmlynarczyk.common.model.dto.broker.workshop.WorkshopCreatedEvent;
 import com.michalmlynarczyk.common.util.Constant;
@@ -21,6 +22,9 @@ import org.springframework.validation.annotation.Validated;
 @RequiredArgsConstructor
 public class EventListenerImpl implements EventListener {
 
+    private final UserService userService;
+
+
     @RabbitListener(bindings = @QueueBinding(
             exchange = @Exchange(name = Constant.WORKSHOP_SERVICE_BROKER_EXCHANGE, type = ExchangeTypes.TOPIC),
             value = @Queue(name = Constant.WORKSHOP_CREATED_QUEUE, durable = "true"),
@@ -28,9 +32,10 @@ public class EventListenerImpl implements EventListener {
     )
     @Override
     public void receiveWorkshopCreatedEvent(@Payload @Valid final BrokerMessageWrapper<WorkshopCreatedEvent> message) {
-        log.info("receiveWorkshopCreatedEvent() - enter - message = {}", message);
+        log.info("receiveWorkshopCreatedEvent() - enter - payload = {}", message);
+        final WorkshopCreatedEvent workshopCreatedEvent = message.payload();
         try {
-
+            userService.assignWorkshopAndUpgradeRole(workshopCreatedEvent.ownerId(), workshopCreatedEvent.workshopId());
         } catch (final Exception e) {
             log.error("receiveWorkshopCreatedEvent() - error", e);
         }
