@@ -86,6 +86,7 @@ public class WorkshopJoinServiceImpl implements WorkshopJoinService {
         } else {
             workshopJoinApplication.reject();
         }
+        workshopJoinRepository.save(workshopJoinApplication);
         log.debug("approveOrRejectWorkshopJoinApplication() - exit - workshopJoinApplication = {}", workshopJoinApplication);
     }
 
