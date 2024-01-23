@@ -12,6 +12,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: password
 
 #
 #springdoc:
@@ -22,6 +27,6 @@ spring:
 #  packages-to-scan: com.michalmlynarczyk.*
 
 token:
-  expiration: 1_200_000
+  expiration: 100_200_000
   signing:
     key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
