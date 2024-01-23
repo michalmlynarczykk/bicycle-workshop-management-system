@@ -1,0 +1,24 @@
+server:
+  port: 8083
+logging:
+  level:
+    com.michalmlynarczyk: DEBUG
+
+spring:
+  data:
+    mongodb:
+      database: order
+      username: root
+      password: password
+      port: 27017
+      host: localhost
+      authentication-database: admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: password
+
+token:
+  signing:
+    key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
