@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,4 +21,8 @@ public interface WorkshopController {
     @PreAuthorize("hasAuthority('WORKSHOP_CREATE_WORKSHOP')")
     ResponseEntity<WorkshopResponse> createWorkshop(@RequestBody @Valid final CreateWorkshopRequest request,
                                                     @AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
+
+    @GetMapping("/assigned")
+    @PreAuthorize("hasAuthority('WORKSHOP_GET_ASSIGNED_WORKSHOP')")
+    ResponseEntity<WorkshopResponse> getAssignedWorkshop(@AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
 }
