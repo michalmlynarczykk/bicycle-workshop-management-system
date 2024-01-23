@@ -3,6 +3,7 @@ package com.michalmlynarczyk.authenticationservice.listener;
 import com.michalmlynarczyk.authenticationservice.service.UserService;
 import com.michalmlynarczyk.common.model.dto.broker.BrokerMessageWrapper;
 import com.michalmlynarczyk.common.model.dto.broker.workshop.WorkshopCreatedEvent;
+import com.michalmlynarczyk.common.model.dto.broker.workshop.WorkshopJoinApplicationApprovedEvent;
 import com.michalmlynarczyk.common.util.Constant;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,23 @@ public class EventListenerImpl implements EventListener {
             log.error("receiveWorkshopCreatedEvent() - error", e);
         }
         log.info("receiveWorkshopCreatedEvent() - exit");
+    }
+
+
+    @RabbitListener(bindings = @QueueBinding(
+            exchange = @Exchange(name = Constant.WORKSHOP_SERVICE_BROKER_EXCHANGE, type = ExchangeTypes.TOPIC),
+            value = @Queue(name = Constant.WORKSHOP_JOIN_APPLICATION_APPROVED_QUEUE, durable = "true"),
+            key = Constant.WORKSHOP_JOIN_APPLICATION_APPROVED_ROUTING_KEY)
+    )
+    @Override
+    public void receiveWorkshopJoinApplicationApprovedEvent(final BrokerMessageWrapper<WorkshopJoinApplicationApprovedEvent> message) {
+        log.info("receiveWorkshopJoinApplicationApprovedEvent() - enter - payload = {}", message);
+        final WorkshopJoinApplicationApprovedEvent workshopCreatedEvent = message.payload();
+        try {
+            userService.assignWorkshopAndUpgradeRole(workshopCreatedEvent.userId(), workshopCreatedEvent.workshopId());
+        } catch (final Exception e) {
+            log.error("receiveWorkshopJoinApplicationApprovedEvent() - error", e);
+        }
+        log.info("receiveWorkshopJoinApplicationApprovedEvent() - exit");
     }
 }
