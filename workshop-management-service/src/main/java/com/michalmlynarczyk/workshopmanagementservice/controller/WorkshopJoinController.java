@@ -33,7 +33,7 @@ public interface WorkshopJoinController {
 
     @PatchMapping("/{joinRequestId}")
     @PreAuthorize("hasAuthority('WORKSHOP_WORKSHOP_JOIN_REQUEST_APPROVE_REJECT')")
-    ResponseEntity<Void> approveOrRejectJoinApplication(@PathVariable final String joinRequestId,
-                                                        @RequestParam final boolean approved,
+    ResponseEntity<Void> approveOrRejectJoinApplication(@PathVariable(name = "joinRequestId") final String joinRequestId,
+                                                        @RequestParam(name = "approved", defaultValue = "true") final boolean approved,
                                                         @AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
 }
