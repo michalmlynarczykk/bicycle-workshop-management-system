@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
                 .map(roleRepository::findByName)
                 .forEach(roleOptional -> {
                     final Role role = roleOptional.orElseThrow(() ->
-                            new RoleNotFoundException("Role not found = " + roleOptional));
+                            new RoleNotFoundException("Role not found - missing configuration"));
                     roles.add(role);
                 });
         log.trace("upgradeUserRoles() - exit - roles after upgrade = {}", roles);
