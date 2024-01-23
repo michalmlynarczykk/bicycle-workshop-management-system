@@ -5,6 +5,7 @@ import com.michalmlynarczyk.workshopmanagementservice.client.broker.BrokerClient
 import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopJoinApplicationAlreadyExistsException;
 import com.michalmlynarczyk.workshopmanagementservice.exception.WorkshopJoinApplicationNotFoundException;
 import com.michalmlynarczyk.workshopmanagementservice.mapper.WorkshopJoinApplicationMapper;
+import com.michalmlynarczyk.workshopmanagementservice.model.dto.ApplicationStatus;
 import com.michalmlynarczyk.workshopmanagementservice.model.dto.request.WorkshopJoinApplicationRequest;
 import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopJoinApplicationResponse;
 import com.michalmlynarczyk.workshopmanagementservice.model.dto.response.WorkshopJoinApplicationResponseWrapper;
@@ -74,6 +75,9 @@ public class WorkshopJoinServiceImpl implements WorkshopJoinService {
         log.debug("approveOrRejectWorkshopJoinApplication() - enter - joinRequestId = {} - approved = {} - workshopId = {}",
                 joinRequestId, approved, workshopId);
         final WorkshopJoinApplication workshopJoinApplication = getWorkshopJoinApplicationOrThrowException(joinRequestId, workshopId);
+        if (!workshopJoinApplication.getStatus().equals(ApplicationStatus.PENDING)) {
+            throw new IllegalStateException(String.format("Workshop join application with id = %s is already approved or rejected", joinRequestId));
+        }
         if (approved) {
             workshopJoinApplication.approve();
             brokerClient.notifyAboutWorkshopJoinApplicationApproved(
@@ -82,6 +86,7 @@ public class WorkshopJoinServiceImpl implements WorkshopJoinService {
         } else {
             workshopJoinApplication.reject();
         }
+        workshopJoinRepository.save(workshopJoinApplication);
         log.debug("approveOrRejectWorkshopJoinApplication() - exit - workshopJoinApplication = {}", workshopJoinApplication);
     }
 

@@ -1,10 +1,7 @@
-package com.michalmlynarczyk.workshopmanagementservice.config;
+package com.michalmlynarczyk.authenticationservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.michalmlynarczyk.common.util.Constant;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.core.ExchangeBuilder;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -31,12 +28,6 @@ public class RabbitConfiguration {
         template.setMessageConverter(messageConverter());
         template.setChannelTransacted(true);
         return template;
-    }
-
-
-    @Bean
-    public TopicExchange workshopServiceExchange() {
-        return ExchangeBuilder.topicExchange(Constant.WORKSHOP_SERVICE_BROKER_EXCHANGE).build();
     }
 
 }
