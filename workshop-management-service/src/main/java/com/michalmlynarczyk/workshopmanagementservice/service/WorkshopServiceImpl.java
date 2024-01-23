@@ -66,4 +66,14 @@ public class WorkshopServiceImpl implements WorkshopService {
     }
 
 
+    @Override
+    public WorkshopResponse getWorkshopResponse(final UUID workshopId) {
+        log.debug("getWorkshopResponse() - enter - workshopId = {}", workshopId);
+        final Workshop workshop = getWorkshopOrThrowException(workshopId);
+        final WorkshopResponse response = WorkshopMapper.toDto(workshop);
+        log.debug("getWorkshopResponse() - exit - response = {}", response);
+        return response;
+    }
+
+
 }

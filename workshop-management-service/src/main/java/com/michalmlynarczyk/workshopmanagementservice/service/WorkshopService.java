@@ -13,4 +13,6 @@ public interface WorkshopService {
                                     final CustomAuthenticationPrincipal principal);
 
     Workshop getWorkshopOrThrowException(final UUID workshopId);
+
+    WorkshopResponse getWorkshopResponse(final UUID workshopId);
 }
