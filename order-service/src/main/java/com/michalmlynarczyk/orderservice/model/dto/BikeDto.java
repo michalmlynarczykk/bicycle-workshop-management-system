@@ -9,7 +9,7 @@ public record BikeDto(
         String model,
         String color,
         String frameNumber,
-        String productionYear,
+        Integer productionYear,
         String description
 ) {
 }

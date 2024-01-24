@@ -19,7 +19,7 @@ public class Bike {
 
     private String frameNumber;
 
-    private String productionYear;
+    private Integer productionYear;
 
     private String description;
 }
