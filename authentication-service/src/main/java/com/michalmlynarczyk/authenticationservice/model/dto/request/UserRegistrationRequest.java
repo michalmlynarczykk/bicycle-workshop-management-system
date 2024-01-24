@@ -1,6 +1,6 @@
 package com.michalmlynarczyk.authenticationservice.model.dto.request;
 
-import com.michalmlynarczyk.common.model.dto.authentication.WorkshopPosition;
+import com.michalmlynarczyk.authenticationservice.model.WorkshopPosition;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

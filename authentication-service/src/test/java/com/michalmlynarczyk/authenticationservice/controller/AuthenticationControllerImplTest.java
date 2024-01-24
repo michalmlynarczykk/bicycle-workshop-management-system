@@ -7,7 +7,7 @@ import com.michalmlynarczyk.authenticationservice.model.dto.request.UserLoginReq
 import com.michalmlynarczyk.authenticationservice.model.dto.request.UserRegistrationRequest;
 import com.michalmlynarczyk.authenticationservice.model.dto.response.JwtTokenResponse;
 import com.michalmlynarczyk.authenticationservice.service.UserService;
-import com.michalmlynarczyk.common.model.dto.authentication.WorkshopPosition;
+import com.michalmlynarczyk.authenticationservice.model.WorkshopPosition;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

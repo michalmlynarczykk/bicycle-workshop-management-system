@@ -11,7 +11,7 @@ import com.michalmlynarczyk.authenticationservice.model.entity.User;
 import com.michalmlynarczyk.authenticationservice.repository.RoleRepository;
 import com.michalmlynarczyk.authenticationservice.repository.UserRepository;
 import com.michalmlynarczyk.authenticationservice.util.jwt.JwtTokenGenerator;
-import com.michalmlynarczyk.common.model.dto.authentication.WorkshopPosition;
+import com.michalmlynarczyk.authenticationservice.model.WorkshopPosition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
