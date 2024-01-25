@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 
 @Slf4j
 @Service
@@ -35,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDetailsResponse updateOrder(final String orderId, final OrderRequest request, final CustomAuthenticationPrincipal principal) {
         log.trace("updateOrder() - enter - orderId = {} - request = {} - principal = {}", orderId, request, principal);
-        final Order order = getOrderOrThrowException(orderId);
+        final Order order = getOrderOrThrowException(orderId, principal.workshopId());
         OrderMapper.updateEntity(order, request);
         orderRepository.save(order);
         log.debug("updateOrder() - order updated = {}", order);
@@ -43,9 +45,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    private Order getOrderOrThrowException(final String orderId) {
-        log.trace("getOrderOrThrowException() - enter - orderId = {}", orderId);
-        final Order order = orderRepository.findById(orderId)
+    private Order getOrderOrThrowException(final String orderId, final UUID workshopId) {
+        log.trace("getOrderOrThrowException() - enter - orderId = {} - workshopId = {}", orderId, workshopId);
+        final Order order = orderRepository.findByIdAndWorkshopId(orderId, workshopId)
                 .orElseThrow(() -> new OrderNotFoundException("Order not found - orderId = {0}", orderId));
         log.debug("getOrderOrThrowException() - exit - order = {}", order);
         return order;
