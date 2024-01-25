@@ -5,6 +5,8 @@ logging:
     com.michalmlynarczyk: DEBUG
 
 spring:
+  application:
+    name: WORKSHOP-MANAGEMENT-SERVICE
   data:
     mongodb:
       database: workshop
@@ -22,3 +24,8 @@ spring:
 token:
   signing:
     key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/

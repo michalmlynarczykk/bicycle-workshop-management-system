@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.michalmlynarczyk</groupId>
+        <artifactId>bicycle-workshop-management-system</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>service-registry</artifactId>
+    <version>1.0.0</version>
+    <name>service-registry</name>
+    <description>Eureka service registry</description>
+    <properties>
+        <java.version>21</java.version>
+        <spring-cloud-starter-netflix-eureka-server.version>4.1.0</spring-cloud-starter-netflix-eureka-server.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <version>${spring-cloud-starter-netflix-eureka-server.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,25 +1,30 @@
 server:
-  port: 8083
+  port: 8082
 logging:
   level:
     com.michalmlynarczyk: DEBUG
 
 spring:
   application:
-    name: ORDER-SERVICE
+    name: WORKSHOP-MANAGEMENT-SERVICE
   data:
     mongodb:
-      database: order
+      database: workshop
       username: root
       password: password
       port: 27017
       host: localhost
       authentication-database: admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: password
 
 token:
   signing:
     key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
+
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8061/eureka/
+    enabled: false

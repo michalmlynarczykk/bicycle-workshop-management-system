@@ -21,5 +21,4 @@ token:
     key: CgQzZTTsFGWA9nSFPKe+lOalq9lc15jHjxnH0DKxTAA=
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8061/eureka/
+    enabled: false
