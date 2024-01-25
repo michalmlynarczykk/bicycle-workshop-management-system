@@ -3,11 +3,13 @@ package com.michalmlynarczyk.orderservice.controller;
 import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthenticationPrincipal;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
+import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,4 +32,14 @@ public interface OrderController {
     ResponseEntity<OrderDetailsResponse> updateOrder(@PathVariable(name = "orderId") final String orderId,
                                                      @RequestBody @Valid final OrderRequest request,
                                                      @AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('ORDER_GET_ALL_ORDERS')")
+    ResponseEntity<OrdersResponseWrapper> getAllOrders(@AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
+
+    @GetMapping("/{orderId}")
+    @PreAuthorize("hasAuthority('ORDER_GET_ORDER_DETAILS')")
+    ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable(name = "orderId") final String orderId,
+                                                          @AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
+
 }

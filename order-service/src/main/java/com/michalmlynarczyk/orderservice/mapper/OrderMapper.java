@@ -2,12 +2,15 @@ package com.michalmlynarczyk.orderservice.mapper;
 
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
+import com.michalmlynarczyk.orderservice.model.dto.response.OrderResponse;
+import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 import com.michalmlynarczyk.orderservice.model.entity.Order;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -49,6 +52,21 @@ public class OrderMapper {
     }
 
 
+    public static OrderResponse toOrderResponse(final Order order) {
+        if (order == null) {
+            return null;
+        }
+
+        return new OrderResponse(
+                order.getId(),
+                order.getCreatedAt(),
+                order.getCollectedAt(),
+                order.getStatus(),
+                ClientMapper.toDto(order.getClient()),
+                BikeMapper.toDto(order.getBike()));
+    }
+
+
     public static void updateEntity(final Order order, final OrderRequest request) {
         if (order == null || request == null) {
             return;
@@ -60,4 +78,15 @@ public class OrderMapper {
         order.setParts(PartMapper.toEntity(request.parts()));
     }
 
+
+    public static OrdersResponseWrapper toOrdersResponseWrapper(final List<Order> orders) {
+        if (orders == null || orders.isEmpty()) {
+            return new OrdersResponseWrapper(List.of());
+        }
+        final List<OrderResponse> orderResponses = orders
+                .stream()
+                .map(OrderMapper::toOrderResponse)
+                .toList();
+        return new OrdersResponseWrapper(orderResponses);
+    }
 }

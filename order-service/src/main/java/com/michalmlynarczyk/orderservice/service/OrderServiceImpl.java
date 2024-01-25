@@ -5,12 +5,14 @@ import com.michalmlynarczyk.orderservice.exception.OrderNotFoundException;
 import com.michalmlynarczyk.orderservice.mapper.OrderMapper;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
+import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 import com.michalmlynarczyk.orderservice.model.entity.Order;
 import com.michalmlynarczyk.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -41,6 +43,23 @@ public class OrderServiceImpl implements OrderService {
         OrderMapper.updateEntity(order, request);
         orderRepository.save(order);
         log.debug("updateOrder() - order updated = {}", order);
+        return OrderMapper.toDetailsResponse(order);
+    }
+
+
+    @Override
+    public OrdersResponseWrapper getAllOrders(final CustomAuthenticationPrincipal principal) {
+        log.trace("getAllOrders() - enter - principal = {}", principal);
+        final List<Order> orders = orderRepository.findAllByWorkshopId(principal.workshopId());
+
+        return OrderMapper.toOrdersResponseWrapper(orders);
+    }
+
+
+    @Override
+    public OrderDetailsResponse getOrderDetails(final String orderId, final CustomAuthenticationPrincipal principal) {
+        log.trace("getOrderDetails() - enter - orderId = {} - principal = {}", orderId, principal);
+        final Order order = getOrderOrThrowException(orderId, principal.workshopId());
         return OrderMapper.toDetailsResponse(order);
     }
 
