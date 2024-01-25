@@ -20,13 +20,22 @@ public enum WorkshopPosition {
 
     private static final Map<String, WorkshopPosition> CANDIDATE_ROLE_MAP = new HashMap<>();
 
+    private static final Map<String, WorkshopPosition> ROLE_MAP = new HashMap<>();
+
     static {
         for (WorkshopPosition position : values()) {
             CANDIDATE_ROLE_MAP.put(position.getCandidateRole(), position);
+            ROLE_MAP.put(position.getFullyQualifiedRole(), position);
+            ROLE_MAP.put(position.getCandidateRole(), position);
         }
     }
 
     public static Optional<WorkshopPosition> getByCandidateRole(final String candidateRole) {
         return Optional.ofNullable(CANDIDATE_ROLE_MAP.get(candidateRole));
+    }
+
+
+    public static Optional<WorkshopPosition> getByRoleName(final String roleName) {
+        return Optional.ofNullable(ROLE_MAP.get(roleName));
     }
 }
