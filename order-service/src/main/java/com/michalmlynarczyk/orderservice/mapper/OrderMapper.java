@@ -1,18 +1,13 @@
 package com.michalmlynarczyk.orderservice.mapper;
 
-import com.michalmlynarczyk.orderservice.model.dto.PartDto;
-import com.michalmlynarczyk.orderservice.model.dto.ServiceDto;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
 import com.michalmlynarczyk.orderservice.model.entity.Order;
-import com.michalmlynarczyk.orderservice.model.entity.Part;
-import com.michalmlynarczyk.orderservice.model.entity.Service;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -21,14 +16,6 @@ public class OrderMapper {
         if (order == null || workshopId == null) {
             return null;
         }
-
-        final List<Part> parts = order.parts()
-                .stream()
-                .map(PartMapper::toEntity).toList();
-        final List<Service> services = order.services()
-                .stream()
-                .map(ServiceMapper::toEntity)
-                .toList();
 
 
         return new Order(
@@ -39,8 +26,8 @@ public class OrderMapper {
                 Order.OrderStatus.NEW,
                 ClientMapper.toEntity(order.client()),
                 BikeMapper.toEntity(order.bike()),
-                services,
-                parts);
+                ServiceMapper.toEntity(order.services()),
+                PartMapper.toEntity(order.parts()));
     }
 
 
@@ -49,14 +36,6 @@ public class OrderMapper {
             return null;
         }
 
-        final List<PartDto> parts = order.getParts()
-                .stream()
-                .map(PartMapper::toDto).toList();
-        final List<ServiceDto> services = order.getServices()
-                .stream()
-                .map(ServiceMapper::toDto)
-                .toList();
-
         return new OrderDetailsResponse(
                 order.getId(),
                 order.getCreatedAt(),
@@ -64,8 +43,21 @@ public class OrderMapper {
                 order.getStatus(),
                 ClientMapper.toDto(order.getClient()),
                 BikeMapper.toDto(order.getBike()),
-                services,
-                parts);
+                ServiceMapper.toDto(order.getServices()),
+                PartMapper.toDto(order.getParts()));
 
     }
+
+
+    public static void updateEntity(final Order order, final OrderRequest request) {
+        if (order == null || request == null) {
+            return;
+        }
+
+        order.setClient(ClientMapper.toEntity(request.client()));
+        order.setBike(BikeMapper.toEntity(request.bike()));
+        order.setServices(ServiceMapper.toEntity(request.services()));
+        order.setParts(PartMapper.toEntity(request.parts()));
+    }
+
 }

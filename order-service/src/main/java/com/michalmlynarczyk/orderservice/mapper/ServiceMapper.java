@@ -5,6 +5,8 @@ import com.michalmlynarczyk.orderservice.model.entity.Service;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceMapper {
 
@@ -21,6 +23,17 @@ public class ServiceMapper {
     }
 
 
+    public static List<Service> toEntity(final List<ServiceDto> services) {
+        if (services == null) {
+            return null;
+        }
+        return services
+                .stream()
+                .map(ServiceMapper::toEntity)
+                .toList();
+    }
+
+
     public static ServiceDto toDto(final Service service) {
         if (service == null) {
             return null;
@@ -31,5 +44,16 @@ public class ServiceMapper {
                 service.getPrice(),
                 service.getQuantity()
         );
+    }
+
+
+    public static List<ServiceDto> toDto(final List<Service> services) {
+        if (services == null) {
+            return null;
+        }
+        return services
+                .stream()
+                .map(ServiceMapper::toDto)
+                .toList();
     }
 }
