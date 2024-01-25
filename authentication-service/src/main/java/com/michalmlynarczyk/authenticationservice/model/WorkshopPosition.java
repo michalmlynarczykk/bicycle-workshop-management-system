@@ -1,4 +1,4 @@
-package com.michalmlynarczyk.common.model.dto.authentication;
+package com.michalmlynarczyk.authenticationservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
