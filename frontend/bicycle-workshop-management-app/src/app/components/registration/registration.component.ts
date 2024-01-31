@@ -1,7 +1,7 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService } from '../../service/authentication.service';
 import { ToastrService } from 'ngx-toastr';
-import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,22 +13,22 @@ export class RegistrationComponent {
   registerForm: FormGroup;
 
   constructor(
-    private  formBuilder:FormBuilder,
-    private authenticationService:AuthenticationService,
-    private toasterService:ToastrService,
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private toasterService: ToastrService,
     private router: Router
   ) { }
-  
+
   ngOnInit(): void {
-    this.createLoginForm();
+    this.createRegistrationForm();
   }
-  createLoginForm(){
-    this.registerForm=this.formBuilder.group({
+  createRegistrationForm() {
+    this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', [Validators.required]],
-      workshopPosition:['', [Validators.required]]
+      workshopPosition: ['', [Validators.required]]
     })
   }
   register() {

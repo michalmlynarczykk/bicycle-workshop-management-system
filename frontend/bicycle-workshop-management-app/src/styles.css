@@ -21,4 +21,9 @@
     color: white;
     border-radius: 8px;
   }
-  
+
+.toast-container {
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}

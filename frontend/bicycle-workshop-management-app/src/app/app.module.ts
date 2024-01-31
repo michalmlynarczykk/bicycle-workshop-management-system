@@ -10,6 +10,8 @@ import { RouterRoutingModule } from './router/router-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 export function tokenGetter() {
@@ -19,7 +21,9 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     NgbModule,
