@@ -2,9 +2,7 @@ name: tests
 
 on:
   push:
-    branches: [ "feature/**" ]
-  pull_request:
-    branches: [ "development", "feature/**" ]
+    branches: [ "feature/backend/**" ]
 
 jobs:
   build:
