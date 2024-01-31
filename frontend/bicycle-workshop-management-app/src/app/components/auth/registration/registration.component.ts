@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationService } from '../../../service/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

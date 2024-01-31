@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationService } from '../../../service/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { UserRole } from '../../model/roles.enum';
+import { UserRole } from '../../../model/roles.enum';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({

@@ -5,13 +5,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { RouterRoutingModule } from './router/router-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MechanicCandidateDashboardComponent } from './components/mechanic-candidate-dashboard/mechanic-candidate-dashboard.component';
+import { OwnerCandidateDashboardComponent } from './components/owner-candidate-dashboard/owner-candidate-dashboard.component';
 
 
 export function tokenGetter() {
@@ -23,7 +25,9 @@ export function tokenGetter() {
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    MechanicCandidateDashboardComponent,
+    OwnerCandidateDashboardComponent
   ],
   imports: [
     NgbModule,
