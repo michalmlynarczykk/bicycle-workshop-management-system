@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -11,8 +10,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthenticationService {
   private authenticationBaseUrl = `${environment.apiBaseUrl}/authentication/external/v1/auth`;
-  private authenticationChangedSource = new Subject<boolean>()
-  authenticationChanged = this.authenticationChangedSource.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -26,13 +23,11 @@ export class AuthenticationService {
   }
 
   public login(loginRequest: any): Observable<any> {
-    this.notifyAuthenticationChange(true);
     return this.http.post<any>(`${this.authenticationBaseUrl}/login`, loginRequest);
   }
 
   logout() {
     localStorage.clear();
-    this.notifyAuthenticationChange(false);
     this.router.navigate(['/login']);
   }
 
@@ -57,7 +52,4 @@ export class AuthenticationService {
     return token ? this.jwtHelper.decodeToken(token) : null;
   }
 
-  private notifyAuthenticationChange(isLoggedIn: boolean): void {
-    this.authenticationChangedSource.next(isLoggedIn);
-  }
 }

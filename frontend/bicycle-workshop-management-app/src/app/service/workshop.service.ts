@@ -21,4 +21,8 @@ export class WorkshopService {
         return this.http.get<any>(`${this.workshopBaseUrl}/assigned`);
     }
 
+    public joinWorkshop(workshopJoinRequest: any): Observable<any> {
+        return this.http.post<any>(`${this.workshopBaseUrl}/join-requests`, workshopJoinRequest);
+    }
+
 }

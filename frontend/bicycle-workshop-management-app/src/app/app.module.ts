@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MechanicCandidateDashboardComponent } from './components/mechanic-candidate-dashboard/mechanic-candidate-dashboard.component';
 import { OwnerCandidateDashboardComponent } from './components/owner-candidate-dashboard/owner-candidate-dashboard.component';
 import { TokenInterceptor } from './token.interceptor';
+import { AssignedWorkshopComponent } from './components/assigned-workshop/assigned-workshop.component';
 
 
 export function tokenGetter() {
@@ -35,7 +36,8 @@ export function tokenGetter() {
     LoginComponent,
     NavbarComponent,
     MechanicCandidateDashboardComponent,
-    OwnerCandidateDashboardComponent
+    OwnerCandidateDashboardComponent,
+    AssignedWorkshopComponent
   ],
   imports: [
     NgbModule,

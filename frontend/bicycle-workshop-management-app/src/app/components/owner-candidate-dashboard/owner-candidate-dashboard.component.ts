@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { WorkshopService } from '../../service/workshop.service';
 import { AuthenticationService } from '../../service/authentication.service';
 
@@ -18,7 +17,6 @@ export class OwnerCandidateDashboardComponent {
     private formBuilder: FormBuilder,
     private workshopService: WorkshopService,
     private toasterService: ToastrService,
-    private router: Router,
     private authenticationService: AuthenticationService
   ) { }
 

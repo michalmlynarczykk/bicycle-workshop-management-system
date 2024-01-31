@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { WorkshopService } from '../../service/workshop.service';
 import { Workshop } from '../../model/workshop';
+import { AuthenticationService } from '../../service/authentication.service';
+import { UserRole } from '../../model/roles.enum';
 
 @Component({
   selector: 'app-assigned-workshop',
@@ -11,15 +13,17 @@ import { Workshop } from '../../model/workshop';
 })
 export class AssignedWorkshopComponent {
   assignedWorkshop: Workshop;
+  isWorkshopOwner: boolean;
 
   constructor(
     private workshopService: WorkshopService,
     private toasterService: ToastrService,
-    private router: Router
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
     this.getAssignedWorkshop();
+    this.isWorkshopOwner = this.authenticationService.roles().includes(UserRole.OWNER);
   }
 
   getAssignedWorkshop() {

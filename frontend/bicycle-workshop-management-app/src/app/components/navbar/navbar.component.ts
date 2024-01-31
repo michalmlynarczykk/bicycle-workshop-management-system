@@ -9,13 +9,9 @@ import { AuthenticationService } from '../../service/authentication.service';
 })
 export class NavbarComponent {
 
-  isLoggedIn: boolean;
-
-  constructor(private authService: AuthenticationService) {
-    this.authService.authenticationChanged.subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-    });
-  }
+  constructor(
+    private authService: AuthenticationService
+  ) { }
 
   logout() {
     this.authService.logout();
