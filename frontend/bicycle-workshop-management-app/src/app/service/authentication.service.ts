@@ -22,7 +22,6 @@ export class AuthenticationService {
   }
 
   public register(registerRequest: any): Observable<any> {
-    console.log(registerRequest)
     return this.http.post<any>(`${this.authenticationBaseUrl}/register`, registerRequest);
   }
 

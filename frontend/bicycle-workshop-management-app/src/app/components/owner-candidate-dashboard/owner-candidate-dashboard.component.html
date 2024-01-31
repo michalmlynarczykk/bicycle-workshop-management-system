@@ -1,1 +1,47 @@
-<p>owner-candidate-dashboard works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3>Create Workshop</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="workshopForm" (ngSubmit)="submit()">
+              <div class="form-group">
+                <label for="name">Workshop Name:</label>
+                <input formControlName="name" type="text" class="form-control" id="name" required>
+              </div>
+  
+              <div class="form-group">
+                <label for="street">Street:</label>
+                <input formControlName="street" type="text" class="form-control" id="street">
+              </div>
+  
+              <div class="form-group">
+                <label for="buildingNumber">Building Number:</label>
+                <input formControlName="buildingNumber" type="text" class="form-control" id="buildingNumber" required>
+              </div>
+  
+              <div class="form-group">
+                <label for="apartmentNumber">Apartment Number:</label>
+                <input formControlName="apartmentNumber" type="text" class="form-control" id="apartmentNumber">
+              </div>
+  
+              <div class="form-group">
+                <label for="city">City:</label>
+                <input formControlName="city" type="text" class="form-control" id="city" required>
+              </div>
+  
+              <div class="form-group">
+                <label for="zipCode">ZIP Code:</label>
+                <input formControlName="zipCode" type="text" class="form-control" id="zipCode" required>
+              </div>
+  
+              <button type="submit" class="btn btn-primary">Create Workshop</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
