@@ -7,13 +7,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { RouterRoutingModule } from './router/router-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/auth/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MechanicCandidateDashboardComponent } from './components/mechanic-candidate-dashboard/mechanic-candidate-dashboard.component';
 import { OwnerCandidateDashboardComponent } from './components/owner-candidate-dashboard/owner-candidate-dashboard.component';
+import { TokenInterceptor } from './token.interceptor';
 
 
 export function tokenGetter() {
@@ -21,6 +22,13 @@ export function tokenGetter() {
 }
 
 @NgModule({
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   declarations: [
     AppComponent,
     RegistrationComponent,
