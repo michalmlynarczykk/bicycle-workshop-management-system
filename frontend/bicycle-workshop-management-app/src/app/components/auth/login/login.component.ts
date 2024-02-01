@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationService } from '../../../service/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { UserRole } from '../../model/roles.enum';
+import { UserRole } from '../../../model/roles.enum';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -53,11 +53,11 @@ export class LoginComponent {
 
   private redirectBasedOnRole(userRoles: string[]): void {
     if (userRoles.includes(UserRole.MECHANIC)) {
-      this.router.navigate(['/mechanic-dashboard']);
+      this.router.navigate(['mechanic-dashboard']);
     } else if (userRoles.includes(UserRole.OWNER)) {
-      this.router.navigate(['/owner-dashboard']);
+      this.router.navigate(['workshops/assigned']);
     } else if (userRoles.includes(UserRole.MECHANIC_CANDIDATE)) {
-      this.router.navigate(['/mechanic-candidate-dashboard']);
+      this.router.navigate(['mechanic-candidate-dashboard']);
     } else if (userRoles.includes(UserRole.OWNER_CANDIDATE)) {
       this.router.navigate(['owner-candidate-dashboard']);
     } else {

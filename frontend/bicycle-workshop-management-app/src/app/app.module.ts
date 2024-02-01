@@ -5,28 +5,49 @@ import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { RouterRoutingModule } from './router/router-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { MechanicCandidateDashboardComponent } from './components/mechanic-candidate-dashboard/mechanic-candidate-dashboard.component';
+import { OwnerCandidateDashboardComponent } from './components/owner-candidate-dashboard/owner-candidate-dashboard.component';
+import { TokenInterceptor } from './token.interceptor';
+import { AssignedWorkshopComponent } from './components/assigned-workshop/assigned-workshop.component';
+import { MatTableModule } from '@angular/material/table';
+import { OwnerDashboardComponent } from './components/owner-dashboard/owner-dashboard.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    MechanicCandidateDashboardComponent,
+    OwnerCandidateDashboardComponent,
+    AssignedWorkshopComponent,
+    OwnerDashboardComponent,
+    UserDetailsComponent
   ],
   imports: [
     NgbModule,
+    MatTableModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,

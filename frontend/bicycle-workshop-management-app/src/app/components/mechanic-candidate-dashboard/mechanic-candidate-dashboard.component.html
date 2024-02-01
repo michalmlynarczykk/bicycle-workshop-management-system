@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">Join a Workshop</h2>
+            <p class="card-text text-center">Submit your request to join a workshop</p>
+  
+            <form [formGroup]="joinWorkshopForm" (ngSubmit)="submit()">
+  
+              <div class="form-group">
+                <label for="workshopId">Workshop ID:</label>
+                <input formControlName="workshopId" type="text" class="form-control m-2" id="workshopId" placeholder="Enter Workshop ID">
+              </div>
+  
+              <button type="submit" class="btn btn-primary btn-block mt-3">Submit Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

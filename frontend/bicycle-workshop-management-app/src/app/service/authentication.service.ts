@@ -2,17 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserDetails } from '../model/user-details';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private authenticationBaseUrl = `${environment.apiBaseUrl}/authentication/external/v1/auth`;
-  private authenticationChangedSource = new Subject<boolean>()
-  authenticationChanged = this.authenticationChangedSource.asObservable();
+  private authenticationBaseUrl = `${environment.apiBaseUrl}/authentication/external/v1`;
 
   constructor(
     private http: HttpClient,
@@ -22,18 +20,19 @@ export class AuthenticationService {
   }
 
   public register(registerRequest: any): Observable<any> {
-    console.log(registerRequest)
-    return this.http.post<any>(`${this.authenticationBaseUrl}/register`, registerRequest);
+    return this.http.post<any>(`${this.authenticationBaseUrl}/auth/register`, registerRequest);
   }
 
   public login(loginRequest: any): Observable<any> {
-    this.notifyAuthenticationChange(true);
-    return this.http.post<any>(`${this.authenticationBaseUrl}/login`, loginRequest);
+    return this.http.post<any>(`${this.authenticationBaseUrl}/auth/login`, loginRequest);
+  }
+
+  public getUserDetails(userId: string): Observable<UserDetails> {
+    return this.http.get<any>(`${this.authenticationBaseUrl}/users/${userId}`);
   }
 
   logout() {
     localStorage.clear();
-    this.notifyAuthenticationChange(false);
     this.router.navigate(['/login']);
   }
 
@@ -58,7 +57,4 @@ export class AuthenticationService {
     return token ? this.jwtHelper.decodeToken(token) : null;
   }
 
-  private notifyAuthenticationChange(isLoggedIn: boolean): void {
-    this.authenticationChangedSource.next(isLoggedIn);
-  }
 }
