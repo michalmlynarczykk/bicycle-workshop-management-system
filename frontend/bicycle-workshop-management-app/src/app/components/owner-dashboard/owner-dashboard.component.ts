@@ -59,7 +59,6 @@ export class OwnerDashboardComponent implements OnInit {
         this.toasterService.error('Error approving join request');
       }
     );
-    // this.refreshPage();
   }
 
   rejectRequest(joinRequestId: string): void {
@@ -72,10 +71,5 @@ export class OwnerDashboardComponent implements OnInit {
         this.toasterService.error('Error rejecting join request');
       }
     );
-    // this.refreshPage();
-  }
-
-  private refreshPage(): void {
-    location.reload();
   }
 }
