@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <p><strong>ID:</strong> {{ userDetails.id }}</p>
+  <p><strong>First Name:</strong> {{ userDetails.firstName }}</p>
+  <p><strong>Last Name:</strong> {{ userDetails.lastName }}</p>
+  <p><strong>Email:</strong> {{ userDetails.email }}</p>
+  <p><strong>Created At:</strong> {{ userDetails.createdAt | date: 'medium' }}</p>
+  <p><strong>Workshop Assigned At:</strong> {{ userDetails.workshopAssignedAt | date: 'medium' }}</p>
+
+  <p><strong>Positions:</strong>
+    <span *ngFor="let position of userDetails.positions; let last = last">
+      {{ position }}{{ !last ? ', ' : '' }}
+    </span>
+  </p>
+</div>

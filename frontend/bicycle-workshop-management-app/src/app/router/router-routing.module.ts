@@ -8,6 +8,7 @@ import { UserRole } from '../model/roles.enum';
 import { OwnerCandidateDashboardComponent } from '../components/owner-candidate-dashboard/owner-candidate-dashboard.component';
 import { AssignedWorkshopComponent } from '../components/assigned-workshop/assigned-workshop.component';
 import { MechanicCandidateDashboardComponent } from '../components/mechanic-candidate-dashboard/mechanic-candidate-dashboard.component';
+import { OwnerDashboardComponent } from '../components/owner-dashboard/owner-dashboard.component';
 
 export const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
@@ -29,6 +30,12 @@ export const routes: Routes = [
     component: OwnerCandidateDashboardComponent, 
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: [UserRole.OWNER_CANDIDATE] }
+  },
+  { 
+    path: 'workshops/join-requests', 
+    component: OwnerDashboardComponent, 
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: [UserRole.OWNER] }
   },
   { 
     path: 'mechanic-candidate-dashboard', 

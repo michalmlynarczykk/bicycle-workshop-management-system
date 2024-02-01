@@ -16,7 +16,10 @@ import { MechanicCandidateDashboardComponent } from './components/mechanic-candi
 import { OwnerCandidateDashboardComponent } from './components/owner-candidate-dashboard/owner-candidate-dashboard.component';
 import { TokenInterceptor } from './token.interceptor';
 import { AssignedWorkshopComponent } from './components/assigned-workshop/assigned-workshop.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { OwnerDashboardComponent } from './components/owner-dashboard/owner-dashboard.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -37,10 +40,14 @@ export function tokenGetter() {
     NavbarComponent,
     MechanicCandidateDashboardComponent,
     OwnerCandidateDashboardComponent,
-    AssignedWorkshopComponent
+    AssignedWorkshopComponent,
+    OwnerDashboardComponent,
+    UserDetailsComponent
   ],
   imports: [
     NgbModule,
+    MatTableModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
