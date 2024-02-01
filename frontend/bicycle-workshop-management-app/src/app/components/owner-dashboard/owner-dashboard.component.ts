@@ -48,4 +48,34 @@ export class OwnerDashboardComponent implements OnInit {
       }
     )
   }
+
+  approveRequest(joinRequestId: string): void {
+    this.workshopService.approveRejectJoinRequest(joinRequestId, true).subscribe(
+      (response) => {
+        this.toasterService.success('Join request approved successfully');
+        this.getWorkshopJoinRequests();
+      },
+      (error) => {
+        this.toasterService.error('Error approving join request');
+      }
+    );
+    // this.refreshPage();
+  }
+
+  rejectRequest(joinRequestId: string): void {
+    this.workshopService.approveRejectJoinRequest(joinRequestId, false).subscribe(
+      (response) => {
+        this.toasterService.success('Join request rejected successfully');
+        this.getWorkshopJoinRequests();
+      },
+      (error) => {
+        this.toasterService.error('Error rejecting join request');
+      }
+    );
+    // this.refreshPage();
+  }
+
+  private refreshPage(): void {
+    location.reload();
+  }
 }
