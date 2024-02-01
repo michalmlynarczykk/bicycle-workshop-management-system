@@ -20,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { OwnerDashboardComponent } from './components/owner-dashboard/owner-dashboard.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -48,6 +49,7 @@ export function tokenGetter() {
     NgbModule,
     MatTableModule,
     MatDialogModule,
+    MatIconModule,
     BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
