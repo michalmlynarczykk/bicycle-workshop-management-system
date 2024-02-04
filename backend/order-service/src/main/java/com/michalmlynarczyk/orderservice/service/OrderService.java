@@ -2,6 +2,7 @@ package com.michalmlynarczyk.orderservice.service;
 
 import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthenticationPrincipal;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
+import com.michalmlynarczyk.orderservice.model.dto.request.UpdateOrderStatusRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 
@@ -14,4 +15,6 @@ public interface OrderService {
     OrdersResponseWrapper getAllOrders(final CustomAuthenticationPrincipal principal);
 
     OrderDetailsResponse getOrderDetails(final String orderId, final CustomAuthenticationPrincipal principal);
+
+    void updateOrderStatus(final String orderId, final UpdateOrderStatusRequest request, final CustomAuthenticationPrincipal principal);
 }

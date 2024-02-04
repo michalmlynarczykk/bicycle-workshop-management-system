@@ -4,6 +4,7 @@ import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthentication
 import com.michalmlynarczyk.orderservice.exception.OrderNotFoundException;
 import com.michalmlynarczyk.orderservice.mapper.OrderMapper;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
+import com.michalmlynarczyk.orderservice.model.dto.request.UpdateOrderStatusRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 import com.michalmlynarczyk.orderservice.model.entity.Order;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,6 +63,16 @@ public class OrderServiceImpl implements OrderService {
         log.trace("getOrderDetails() - enter - orderId = {} - principal = {}", orderId, principal);
         final Order order = getOrderOrThrowException(orderId, principal.workshopId());
         return OrderMapper.toDetailsResponse(order);
+    }
+
+
+    @Override
+    public void updateOrderStatus(final String orderId, final UpdateOrderStatusRequest request, final CustomAuthenticationPrincipal principal) {
+        log.trace("updateOrderStatus() - enter - orderId = {} - request = {} - principal = {}", orderId, request, principal);
+        final Order order = getOrderOrThrowException(orderId, principal.workshopId());
+        order.updateOrderStatus(request.status());
+        orderRepository.save(order);
+        log.debug("updateOrderStatus() - order updated = {}", order);
     }
 
 
