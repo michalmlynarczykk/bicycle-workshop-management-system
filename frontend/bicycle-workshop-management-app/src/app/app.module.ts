@@ -23,7 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { OrdersDashboarComponent } from './components/order/orders-dashboar/orders-dashboar.component';
 import { CreateOrderComponent } from './components/order/create-order/create-order.component';
-import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { OrderDetailsComponent } from './components/order/order-details/order-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
