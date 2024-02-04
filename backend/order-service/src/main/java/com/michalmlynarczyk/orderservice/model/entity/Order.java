@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -42,5 +43,13 @@ public class Order {
         IN_PROGRESS,
         DONE,
         COLLECTED
+    }
+
+
+    public void updateOrderStatus(final OrderStatus status) {
+        this.status = status;
+        if (status.equals(OrderStatus.COLLECTED)) {
+            this.collectedAt = Date.from(Instant.now());
+        }
     }
 }

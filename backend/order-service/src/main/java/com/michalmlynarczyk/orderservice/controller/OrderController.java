@@ -2,6 +2,7 @@ package com.michalmlynarczyk.orderservice.controller;
 
 import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthenticationPrincipal;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
+import com.michalmlynarczyk.orderservice.model.dto.request.UpdateOrderStatusRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +32,12 @@ public interface OrderController {
     @PreAuthorize("hasAuthority('ORDER_UPDATE_ORDER')")
     ResponseEntity<OrderDetailsResponse> updateOrder(@PathVariable(name = "orderId") final String orderId,
                                                      @RequestBody @Valid final OrderRequest request,
+                                                     @AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
+
+    @PutMapping("/status/{orderId}")
+    @PreAuthorize("hasAuthority('ORDER_UPDATE_ORDER_STATUS')")
+    ResponseEntity<OrderDetailsResponse> updateOrderStatus(@PathVariable(name = "orderId") final String orderId,
+                                                     @RequestBody @Valid final UpdateOrderStatusRequest request,
                                                      @AuthenticationPrincipal final CustomAuthenticationPrincipal principal);
 
     @GetMapping

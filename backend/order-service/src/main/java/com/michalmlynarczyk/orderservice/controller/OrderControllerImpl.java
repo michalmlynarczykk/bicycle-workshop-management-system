@@ -2,6 +2,7 @@ package com.michalmlynarczyk.orderservice.controller;
 
 import com.michalmlynarczyk.common.model.dto.authentication.CustomAuthenticationPrincipal;
 import com.michalmlynarczyk.orderservice.model.dto.request.OrderRequest;
+import com.michalmlynarczyk.orderservice.model.dto.request.UpdateOrderStatusRequest;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrderDetailsResponse;
 import com.michalmlynarczyk.orderservice.model.dto.response.OrdersResponseWrapper;
 import com.michalmlynarczyk.orderservice.service.OrderService;
@@ -37,6 +38,16 @@ public class OrderControllerImpl implements OrderController {
         final OrderDetailsResponse response = orderService.updateOrder(orderId, request, principal);
         log.debug("updateOrder() - exit - response = {}", response);
         return ResponseEntity.ok(response);
+    }
+
+
+    @Override
+    public ResponseEntity<OrderDetailsResponse> updateOrderStatus(final String orderId,
+                                                                  final UpdateOrderStatusRequest request,
+                                                                  final CustomAuthenticationPrincipal principal) {
+        log.debug("updateOrderStatus() - enter - orderId = {} - request = {} - principal = {}", orderId, request, principal);
+        orderService.updateOrderStatus(orderId, request, principal);
+        return ResponseEntity.noContent().build();
     }
 
 
