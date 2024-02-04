@@ -3,7 +3,7 @@ import { OrderService } from '../../../service/order.service';
 import { Order } from '../../../model/order';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { OrderDetailsComponent } from '../../order-details/order-details.component';
+import { OrderDetailsComponent } from '../order-details/order-details.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
