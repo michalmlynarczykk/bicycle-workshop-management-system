@@ -33,6 +33,7 @@ export class LoginComponent {
   }
   login() {
     if (this.loginForm.valid) {
+      localStorage.clear();
       const loginModel = Object.assign({}, this.loginForm.value);
       this.authenticationService.login(loginModel).subscribe(
         (response) => {
@@ -53,7 +54,7 @@ export class LoginComponent {
 
   private redirectBasedOnRole(userRoles: string[]): void {
     if (userRoles.includes(UserRole.MECHANIC)) {
-      this.router.navigate(['mechanic-dashboard']);
+      this.router.navigate(['orders']);
     } else if (userRoles.includes(UserRole.OWNER)) {
       this.router.navigate(['workshops/assigned']);
     } else if (userRoles.includes(UserRole.MECHANIC_CANDIDATE)) {

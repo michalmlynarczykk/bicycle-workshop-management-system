@@ -13,7 +13,7 @@ import { AuthenticationService } from '../../service/authentication.service';
 })
 export class OwnerDashboardComponent implements OnInit {
   workshopJoinRequests: WorkshopJoinRequest[] = [];
-  displayedColumns: string[] = ['id', 'createdAt', 'decidedAt', 'workshopId', 'userId', 'status'];
+  displayedColumns: string[] = ['id', 'createdAt', 'decidedAt', 'workshopId', 'userId', 'status', 'actions'];
   constructor(
     private workshopService: WorkshopService,
     private toasterService: ToastrService,
