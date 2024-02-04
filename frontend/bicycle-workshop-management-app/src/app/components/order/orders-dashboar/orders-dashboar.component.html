@@ -25,7 +25,22 @@
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let order">{{ order.status }}</td>
+        <td mat-cell *matCellDef="let order">
+          <ng-container *ngIf="order.status !== 'COLLECTED'; else statusCollected">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select [(value)]="order.status" (selectionChange)="changeOrderStatus(order.id, $event.value)">
+                <mat-option value="NEW">New</mat-option>
+                <mat-option value="IN_PROGRESS">In progress</mat-option>
+                <mat-option value="DONE">Done</mat-option>
+                <mat-option value="COLLECTED">Collected</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+          <ng-template #statusCollected>
+            {{ order.status }}
+          </ng-template>
+        </td>
       </ng-container>
 
       <!-- Client Column -->

@@ -24,6 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { OrdersDashboarComponent } from './components/order/orders-dashboar/orders-dashboar.component';
 import { CreateOrderComponent } from './components/order/create-order/create-order.component';
 import { OrderDetailsComponent } from './components/order/order-details/order-details.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -56,6 +58,8 @@ export function tokenGetter() {
     MatTableModule,
     MatDialogModule,
     MatIconModule,
+    MatOptionModule,
+    MatSelectModule,
     BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
