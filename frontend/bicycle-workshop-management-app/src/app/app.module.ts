@@ -19,8 +19,11 @@ import { AssignedWorkshopComponent } from './components/assigned-workshop/assign
 import { MatTableModule } from '@angular/material/table';
 import { OwnerDashboardComponent } from './components/owner-dashboard/owner-dashboard.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { OrdersDashboarComponent } from './components/order/orders-dashboar/orders-dashboar.component';
+import { CreateOrderComponent } from './components/order/create-order/create-order.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -43,7 +46,10 @@ export function tokenGetter() {
     OwnerCandidateDashboardComponent,
     AssignedWorkshopComponent,
     OwnerDashboardComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    OrdersDashboarComponent,
+    CreateOrderComponent,
+    OrderDetailsComponent
   ],
   imports: [
     NgbModule,

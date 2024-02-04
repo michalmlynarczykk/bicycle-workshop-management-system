@@ -9,22 +9,12 @@ import { OwnerCandidateDashboardComponent } from '../components/owner-candidate-
 import { AssignedWorkshopComponent } from '../components/assigned-workshop/assigned-workshop.component';
 import { MechanicCandidateDashboardComponent } from '../components/mechanic-candidate-dashboard/mechanic-candidate-dashboard.component';
 import { OwnerDashboardComponent } from '../components/owner-dashboard/owner-dashboard.component';
+import { OrdersDashboarComponent } from '../components/order/orders-dashboar/orders-dashboar.component';
+import { CreateOrderComponent } from '../components/order/create-order/create-order.component';
 
 export const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
-  // { 
-  //   path: 'owner-dashboard', 
-  //   component: OwnerDashboardComponent, 
-  //   canActivate: [AuthGuard, RoleGuard],
-  //   data: { expectedRole: [UserRole.OWNER, UserRole.OWNER_CANDIDATE] }
-  // },
-  // { 
-  //   path: 'mechanic-candidate-dashboard', 
-  //   component: MechanicCandidateDashboardComponent, 
-  //   canActivate: [AuthGuard, RoleGuard],
-  //   data: { expectedRole: [UserRole.MECHANIC_CANDIDATE] }
-  // },
   { 
     path: 'owner-candidate-dashboard', 
     component: OwnerCandidateDashboardComponent, 
@@ -49,6 +39,18 @@ export const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: [UserRole.OWNER, UserRole.MECHANIC] }
   },
+  { 
+    path: 'orders', 
+    component: OrdersDashboarComponent, 
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: [UserRole.OWNER, UserRole.MECHANIC] }
+  },
+  { 
+    path: 'orders/create', 
+    component: CreateOrderComponent, 
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: [UserRole.OWNER, UserRole.MECHANIC] }
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,48 @@
+<div mat-dialog-content>
+    <p><strong>ID:</strong> {{ extendedOrder.id }}</p>
+    <p><strong>Created At:</strong> {{ extendedOrder.createdAt | date: 'medium' }}</p>
+    <p><strong>Collected At:</strong> {{ extendedOrder.collectedAt | date: 'medium' }}</p>
+    <p><strong>Status:</strong> {{ extendedOrder.status }}</p>
+  
+    <div>
+      <h4>Client Details</h4>
+      <p><strong>First Name:</strong> {{ extendedOrder.client.firstName }}</p>
+      <p><strong>Last Name:</strong> {{ extendedOrder.client.lastName }}</p>
+      <p><strong>Email:</strong> {{ extendedOrder.client.email }}</p>
+    </div>
+  
+    <div>
+      <h4>Bike Details</h4>
+      <p><strong>Brand:</strong> {{ extendedOrder.bike.brand }}</p>
+      <p><strong>Model:</strong> {{ extendedOrder.bike.model }}</p>
+      <p><strong>Color:</strong> {{ extendedOrder.bike.color }}</p>
+      <p><strong>Frame Number:</strong> {{ extendedOrder.bike.frameNumber }}</p>
+      <p><strong>Production Year:</strong> {{ extendedOrder.bike.productionYear }}</p>
+      <p><strong>Description:</strong> {{ extendedOrder.bike.description }}</p>
+    </div>
+  
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li *ngFor="let service of extendedOrder.services">
+          <p><strong>Name:</strong> {{ service.name }}</p>
+          <p><strong>Description:</strong> {{ service.description }}</p>
+          <p><strong>Price:</strong> {{ service.price }}</p>
+          <p><strong>Quantity:</strong> {{ service.quantity }}</p>
+        </li>
+      </ul>
+    </div>
+  
+    <div>
+      <h4>Parts</h4>
+      <ul>
+        <li *ngFor="let part of extendedOrder.parts">
+          <p><strong>Name:</strong> {{ part.name }}</p>
+          <p><strong>Description:</strong> {{ part.description }}</p>
+          <p><strong>Price:</strong> {{ part.price }}</p>
+          <p><strong>Quantity:</strong> {{ part.quantity }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

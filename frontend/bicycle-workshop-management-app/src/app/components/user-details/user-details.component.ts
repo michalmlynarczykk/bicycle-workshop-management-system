@@ -1,5 +1,4 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../service/authentication.service';
 import { UserDetails } from '../../model/user-details';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
