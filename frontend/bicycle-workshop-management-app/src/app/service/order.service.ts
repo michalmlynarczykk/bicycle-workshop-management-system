@@ -21,6 +21,10 @@ export class OrderService {
         return this.http.put<any>(`${this.orderBaseUrl}/${orderId}`, updateOrderRequest);
     }
 
+    public upadteOrderStatus(updateOrderStatusRequest: any, orderId: string): Observable<any> {
+        return this.http.put<any>(`${this.orderBaseUrl}/status/${orderId}`, updateOrderStatusRequest);
+    }
+
     public getOrders(): Observable<any> {
         return this.http.get<any>(`${this.orderBaseUrl}`);
     }

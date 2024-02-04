@@ -56,4 +56,16 @@ export class OrdersDashboarComponent {
   createNewOrder(): void {
     this.router.navigate(['orders/create']);
   }
+
+  changeOrderStatus(orderId: string, selectedStatus: string): void {
+    const requestBody = { status: selectedStatus };
+    this.orderService.upadteOrderStatus(requestBody, orderId).subscribe(
+      (response) => {
+        this.toasterService.success('Order status updated successfully');
+      },
+      (error) => {
+        this.toasterService.error('Error updating order status');
+      }
+    );
+  }
 }
