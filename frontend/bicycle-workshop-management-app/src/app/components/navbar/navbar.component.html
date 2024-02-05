@@ -1,8 +1,44 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Bike workshop management system</a>
+  <a class="navbar-brand" routerLink="/orders">Bike workshop management system</a>
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
+      <ng-container *ngIf="userRoles.includes('ROLE_OWNER_CANDIDATE')">
+        <li class="nav-item">
+          <a class="nav-link" √="/owner-candidate-dashboard" routerLinkActive="active">Create workshop</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="userRoles.includes('ROLE_OWNER')">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/workshops/join-requests" routerLinkActive="active">Workshop join requests</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="userRoles.includes('ROLE_MECHANIC_CANDIDATE')">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/mechanic-candidate-dashboard" routerLinkActive="active">Join Workshop</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="userRoles.includes('ROLE_OWNER') || userRoles.includes('ROLE_MECHANIC')">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/workshops/assigned" routerLinkActive="active">My workshop</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="userRoles.includes('ROLE_OWNER') || userRoles.includes('ROLE_MECHANIC')">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/orders" routerLinkActive="active">Orders</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="userRoles.includes('ROLE_OWNER') || userRoles.includes('ROLE_MECHANIC')">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/orders/create" routerLinkActive="active">Add order</a>
+        </li>
+      </ng-container>
+
       <li class="nav-item">
         <button class="btn btn-link nav-link" (click)="logout()">Logout</button>
       </li>
