@@ -3,15 +3,23 @@
 #### The system is designed to facilitate efficient workflows in bike workshops, providing tools for both workshop owners and mechanics.
 
 ## Technology Stack:
-- Java 21
-- Spring Boot 3
-- Spring (Cloud, Security, Data, Web, Validation etc.)
-- Maven
-- MongoDB: NoSQL database for storing workshop and order-related data.
-- PostgreSQL: A relational database for managing data, such as user information.
-- RabbitMQ: A message broker for handling asynchronous communication between microservices.
-- JWT: JSON Web Tokens for authorization.
-- OpenAPI/Swagger: API documentation.
+Backend:
+-  Java 21
+-  Spring Boot 3
+-  Spring (Cloud, Security, Data, Web, Validation etc.)
+-  Maven
+-  MongoDB: NoSQL database for storing workshop and order-related data.
+-  PostgreSQL: A relational database for managing data, such as user information.
+-  RabbitMQ: A message broker for handling asynchronous communication between microservices.
+-  JWT
+-  OpenAPI/Swagger: API documentation.
+
+Frontend:
+- TypeScript 
+- Angular
+- HTML
+- CSS
+
 
 ## Features:
 1. User Registration
